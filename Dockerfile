@@ -22,7 +22,8 @@ RUN rustup target add wasm32-unknown-emscripten --toolchain $RUST_VERSION
 RUN set -eux; \
     ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld64.so.1; \
     npm install terser -g; \
-    curl -sL $BINARYEN |tar zxpvf -;
+    curl -sL $BINARYEN |tar zxpvf -; \
+    cp -rp binaryen*/* /usr/local/bin/.
 
 RUN time cargo install wasm-pack
 RUN time cargo install tinysearch
