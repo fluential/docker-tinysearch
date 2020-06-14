@@ -2,7 +2,7 @@
 #   - binaryen
 #   - wasm-pack
 #   - terser
-FROM rust:alpine as binary-build
+FROM rustlang/rust:nightly-alpine as binary-build
 
 WORKDIR /tmp
 
