@@ -25,8 +25,8 @@ RUN set -eux; \
     curl -sL $BINARYEN |tar zxpvf -; \
     cp -rp binaryen*/* /usr/local/bin/.
 
-RUN time cargo install wasm-pack
-RUN time cargo install tinysearch
+RUN time cargo install --force --git https://github.com/mre/wasm-pack.git --branch first-class-bins
+RUN time cargo install --force --git https://github.com/mre/tinysearch
 
 RUN wasm-pack --version
 RUN tinysearch --version
