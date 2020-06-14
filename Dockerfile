@@ -15,7 +15,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
 RUN rustup target add asmjs-unknown-emscripten
 RUN rustup target add wasm32-unknown-emscripten
 
-RUN set -eux; \
+RUN set -eux -o pipefail; \
     ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld64.so.1; \
     npm install terser -g; \
     curl -sL https://api.github.com/repos/WebAssembly/binaryen/releases/latest|grep tarball|awk '{print $2}'|sed 's/,//g'|xargs curl -sL |tar zxp ; \
