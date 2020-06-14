@@ -19,7 +19,7 @@ RUN set -eux; \
     ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld64.so.1; \
     npm install terser -g; \
     curl -sL https://api.github.com/repos/WebAssembly/binaryen/releases/latest|grep tarball|awk '{print $2}'|sed 's/,//g'|xargs curl -sL |tar zxp ; \
-    cp -rp binaryen*/* /usr/local/bin/.
+    cp -rp WebAssembly-binaryen*/* /usr/local/bin/.
 
 RUN time cargo install --force --git https://github.com/mre/wasm-pack.git --branch first-class-bins
 RUN time cargo install --force --git https://github.com/mre/tinysearch
