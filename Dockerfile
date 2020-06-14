@@ -10,7 +10,7 @@ RUN apk add --update --no-cache --virtual build-dependencies musl-dev openssl-de
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:$PATH \
+    PATH=/usr/local/cargo/bin:$PATH
 
 RUN rustup target add asmjs-unknown-emscripten
 RUN rustup target add wasm32-unknown-emscripten
