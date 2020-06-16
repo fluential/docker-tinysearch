@@ -10,7 +10,6 @@ ARG TINY_REPO=https://github.com/mre/tinysearch
 ARG TINY_BRANCH=master
 ARG RUST_IMAGE=rust:alpine
 
-
 FROM $RUST_IMAGE as binary-build
 
 ARG WASM_REPO
@@ -18,7 +17,6 @@ ARG WASM_BRANCH
 ARG TINY_REPO
 ARG TINY_BRANCH
 ARG TINY_MAGIC
-
 
 WORKDIR /tmp
 
