@@ -15,6 +15,10 @@ Available buid args:
  - WASM_BRANCH
  - TINY_REPO
  - TINY_BRANCH
+ - TINY_MAGIC (for a magic number)
 ```
-docker build --build-arg WASM_BRANCH=master -t devbuild .
+docker build --build-arg WASM_BRANCH=master -t tinysearch .
+```
+```
+docker build --build-arg TINY_MAGIC=64 -t tinysearch .
 ```

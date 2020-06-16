@@ -6,13 +6,17 @@ ARG WASM_REPO=https://github.com/mre/wasm-pack.git
 ARG WASM_BRANCH=first-class-bins
 ARG TINY_REPO=https://github.com/mre/tinysearch
 ARG TINY_BRANCH=master
+ARG RUST_IMAGE=rust:alpine
 
-FROM rust:alpine as binary-build
+
+FROM $RUST_IMAGE as binary-build
 
 ARG WASM_REPO
 ARG WASM_BRANCH
 ARG TINY_REPO
 ARG TINY_BRANCH
+ARG TINY_MAGIC
+
 
 WORKDIR /tmp
 
@@ -38,11 +42,13 @@ RUN set -eux -o pipefail; \
     cp -rp WebAssembly-binaryen*/* /usr/local/bin/.
 
 RUN time cargo install --force --git "$WASM_REPO" --branch "$WASM_BRANCH"
-RUN time cargo install --force --git "$TINY_REPO" --branch "$TINY_BRANCH"
+
+RUN cd /tmp && git clone --branch "$TINY_BRANCH" "$TINY_REPO"
+RUN cd /tmp/tinysearch && if ! [[ -z $TINY_MAGIC ]]; then sed -i.bak bin/src/storage.rs -e "s/let mut filter = CuckooFilter::with_capacity(words.len() + 10);/let mut filter = CuckooFilter::with_capacity(words.len() + $TINY_MAGIC);/g";fi && cargo build --release && cp target/release/tinysearch $CARGO_HOME/bin && echo $TINY_MAGIC |tee /.tinymagic
 
 RUN wasm-pack --version
 RUN tinysearch --version
 
-RUN rm -rf /tmp/*
+RUN rm -rf /tmp/*; rm -rf /usr/local/cargo/{git,registry}
 
 CMD ["/usr/local/cargo/bin/tinysearch"]
