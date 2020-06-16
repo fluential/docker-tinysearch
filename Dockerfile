@@ -2,6 +2,8 @@
 #   - binaryen
 #   - wasm-pack
 #   - terser
+# For nightly rust toolset use build arg RUST_IMAGE=rustlang/rust:nightly-alpine
+#
 ARG WASM_REPO=https://github.com/mre/wasm-pack.git
 ARG WASM_BRANCH=first-class-bins
 ARG TINY_REPO=https://github.com/mre/tinysearch
