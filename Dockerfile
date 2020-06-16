@@ -37,11 +37,11 @@ RUN set -eux -o pipefail; \
     curl -sL https://api.github.com/repos/WebAssembly/binaryen/releases/latest|grep tarball|awk '{print $2}'|sed 's/,//g'|xargs curl -sL |tar zxp ; \
     cp -rp WebAssembly-binaryen*/* /usr/local/bin/.
 
-RUN echo time cargo install --force --git "$WASM_REPO" --branch "$WASM_BRANCH"
-RUN echo time cargo install --force --git "$TINY_REPO" --branch "$TINY_BRANCH"
+RUN time cargo install --force --git "$WASM_REPO" --branch "$WASM_BRANCH"
+RUN time cargo install --force --git "$TINY_REPO" --branch "$TINY_BRANCH"
 
-#RUN wasm-pack --version
-#RUN tinysearch --version
+RUN wasm-pack --version
+RUN tinysearch --version
 
 RUN rm -rf /tmp/*
 
