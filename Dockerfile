@@ -4,7 +4,7 @@
 #   - terser
 ARG WASM_REPO=https://github.com/mre/wasm-pack.git
 ARG WASM_BRANCH=first-class-bins
-ARG TINY_REPO=https//github.com/mre/tinysearch
+ARG TINY_REPO=https://github.com/mre/tinysearch
 ARG TINY_BRANCH=master
 
 FROM rust:alpine as binary-build
